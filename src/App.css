@@ -1,0 +1,15 @@
+/* Basic layout styles for app and main content */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f6fff8;
+}
+.main-content {
+  flex: 1;
+  background: #f6fff8;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+  color: #888;
+}

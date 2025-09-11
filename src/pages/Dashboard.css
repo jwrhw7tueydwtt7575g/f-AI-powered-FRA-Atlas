@@ -1,0 +1,53 @@
+.dashboard-page {
+  padding: 32px 40px;
+}
+.dashboard-desc {
+  color: #444;
+  margin-bottom: 24px;
+}
+.dashboard-cards {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.dashboard-card {
+  background: #f6fff8;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0001;
+  padding: 24px 32px;
+  min-width: 180px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.card-value {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin: 8px 0;
+}
+.card-sub {
+  color: #1a7f5a;
+  font-size: 0.95rem;
+}
+.dashboard-progress {
+  display: flex;
+  gap: 32px;
+}
+.progress-chart, .progress-status {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0001;
+  padding: 24px;
+  flex: 1;
+}
+.chart-placeholder, .status-placeholder {
+  height: 180px;
+  background: #e6f4ea;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a7f5a;
+  font-size: 1.2rem;
+}

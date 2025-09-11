@@ -1,0 +1,16 @@
+# Requirements for fra-atlas React + Vite project
+# (For Node.js/React projects, requirements.txt is not standard, but listing main dependencies for reference)
+
+# Node.js dependencies (install via npm or yarn)
+react
+react-dom
+react-scripts
+vite
+react-leaflet
+leaflet
+recharts
+
+# For Python-based tooling (optional, if any)
+# (Uncomment if you use Python scripts for data processing)
+# pandas
+# numpy

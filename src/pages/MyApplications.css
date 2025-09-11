@@ -1,0 +1,80 @@
+.my-applications-page {
+  padding: 32px 40px;
+}
+.applications-cards {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.applications-card {
+  background: #f6fff8;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0001;
+  padding: 18px 28px;
+  min-width: 120px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.applications-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.applications-actions input {
+  flex: 2;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.applications-actions select {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.new-app-btn {
+  background: #1a7f5a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.applications-list {
+  margin-top: 16px;
+}
+.application-item {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0001;
+  padding: 24px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+}
+.application-id {
+  font-weight: bold;
+  color: #1a7f5a;
+}
+.application-status.submitted {
+  background: #e6f4ea;
+  color: #1a7f5a;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-weight: 500;
+}
+.view-details-btn {
+  background: #1a7f5a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+}
