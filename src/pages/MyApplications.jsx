@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './MyApplications.css';
 import { useApplications } from '../context/ApplicationContext';
 
 export default function MyApplications() {
   // ✅ Hooks must be inside a component function
   const { applications } = useApplications();
+  const [search, setSearch] = useState('');
+  const [status, setStatus] = useState('All Status');
 
-  // ✅ Safely handle undefined or empty
-  const submittedApps = (applications || []).filter(app => app.status === 'Submitted');
+  // Status options
+  const statusOptions = ['All Status', 'Submitted', 'Approved', 'Pending', 'Rejected'];
+
+  // Filter applications by search and status
+  const filteredApps = (applications || []).filter(app => {
+    const matchesSearch =
+      app.id.toLowerCase().includes(search.toLowerCase()) ||
+      app.name.toLowerCase().includes(search.toLowerCase()) ||
+      app.village.toLowerCase().includes(search.toLowerCase());
+    const matchesStatus = status === 'All Status' || app.status === status;
+    return matchesSearch && matchesStatus;
+  });
+
+  // Count by status for summary cards
+  const statusCounts = {
+    Submitted: (applications || []).filter(app => app.status === 'Submitted').length,
+    Approved: (applications || []).filter(app => app.status === 'Approved').length,
+    Pending: (applications || []).filter(app => app.status === 'Pending').length,
+    Rejected: (applications || []).filter(app => app.status === 'Rejected').length,
+  };
 
   return (
     <div className="my-applications-page">
@@ -16,16 +36,16 @@ export default function MyApplications() {
       {/* Summary cards */}
       <div className="applications-cards">
         <div className="applications-card">
-          Submitted <span>{submittedApps.length}</span>
+          Submitted <span>{statusCounts.Submitted}</span>
         </div>
         <div className="applications-card">
-          Under Review <span>0</span>
+          Approved <span>{statusCounts.Approved}</span>
         </div>
         <div className="applications-card">
-          Approved <span>0</span>
+          Pending <span>{statusCounts.Pending}</span>
         </div>
         <div className="applications-card">
-          Rejected <span>0</span>
+          Rejected <span>{statusCounts.Rejected}</span>
         </div>
       </div>
 
@@ -34,17 +54,21 @@ export default function MyApplications() {
         <input
           type="text"
           placeholder="Search by application ID, name, or village..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
         />
-        <select>
-          <option>All Status</option>
+        <select value={status} onChange={e => setStatus(e.target.value)}>
+          {statusOptions.map(opt => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
         </select>
         <button className="new-app-btn">+ New Application</button>
       </div>
 
       {/* Applications list */}
       <div className="applications-list">
-        {submittedApps.length > 0 ? (
-          submittedApps.map(app => (
+        {filteredApps.length > 0 ? (
+          filteredApps.map(app => (
             <div className="application-item" key={app.id}>
               <div className="application-id">{app.id}</div>
               <div className="application-name">{app.name}</div>
@@ -58,12 +82,12 @@ export default function MyApplications() {
               <div className="application-level">
                 Committee Level: Village Level
               </div>
-              <div className="application-status submitted">Submitted</div>
+              <div className={`application-status ${app.status.toLowerCase()}`}>{app.status}</div>
               <button className="view-details-btn">View Details</button>
             </div>
           ))
         ) : (
-          <p>No submitted applications yet.</p>
+          <p>No applications found.</p>
         )}
       </div>
     </div>
