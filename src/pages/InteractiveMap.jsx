@@ -76,12 +76,26 @@ export default function InteractiveMap() {
             attribution="&copy; OpenStreetMap contributors"
           />
           {layers.applications && filteredApps.map(app => (
-            <>
+            <React.Fragment key={app.id}>
               {app.boundary && (
-                <Polygon positions={app.boundary} pathOptions={{ color: '#1976d2', fillOpacity: 0.2 }} />
+                <Polygon
+                  key={app.id + '-boundary'}
+                  positions={app.boundary}
+                  pathOptions={{
+                    color:
+                      app.status === 'Pending' ? 'yellow'
+                      : app.status === 'Rejected' ? 'red'
+                      : '#1976d2',
+                    fillOpacity: 0.2,
+                  }}
+                />
               )}
               {app.latitude && app.longitude && (
-                <Marker key={app.id} position={[app.latitude, app.longitude]} icon={markerIcon}>
+                <Marker
+                  key={app.id + '-marker'}
+                  position={[app.latitude, app.longitude]}
+                  icon={markerIcon}
+                >
                   <Popup>
                     <b>{app.name}</b><br />
                     <b>Application ID:</b> {app.id}<br />
@@ -90,11 +104,24 @@ export default function InteractiveMap() {
                     <b>Village:</b> {app.village}<br />
                     <b>Rights Type:</b> {app.rightsType}<br />
                     <b>Area Claimed:</b> {app.area} ha<br />
-                    <span style={{ color: '#fff', background: '#fbc02d', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>Submitted</span>
+                    <span
+                      style={{
+                        color: '#fff',
+                        background:
+                          app.status === 'Pending' ? 'yellow'
+                          : app.status === 'Rejected' ? 'red'
+                          : '#fbc02d',
+                        padding: '2px 8px',
+                        borderRadius: 4,
+                        fontWeight: 600,
+                      }}
+                    >
+                      {app.status}
+                    </span>
                   </Popup>
                 </Marker>
               )}
-            </>
+            </React.Fragment>
           ))}
         </MapContainer>
       </div>

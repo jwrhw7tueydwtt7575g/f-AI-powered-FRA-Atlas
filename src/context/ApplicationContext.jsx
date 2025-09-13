@@ -53,7 +53,20 @@ export function ApplicationProvider({ children }) {
 
   // function to add new applications
   const addApplication = (app) => {
-    setApplications((prev) => [...prev, app]);
+    setApplications((prev) => {
+      // Check for duplicate area claim (same village, district, area, boundary)
+      let duplicateIdx = prev.findIndex(
+        a => a.village === app.village && a.district === app.district && a.area === app.area && JSON.stringify(a.boundary) === JSON.stringify(app.boundary)
+      );
+      if (duplicateIdx !== -1) {
+        // Mark both as Pending (conflict)
+        const updatedPrev = prev.map((a, idx) =>
+          idx === duplicateIdx ? { ...a, status: 'Pending' } : a
+        );
+        return [...updatedPrev, { ...app, status: 'Pending' }];
+      }
+      return [...prev, app];
+    });
   };
 
   return (
